@@ -13,11 +13,10 @@ try:
 except IOError:
     CHANGES = ''
 
-version = '0.1dev'
+version = '0.1.0'
 
 install_requires = [
-    'Kotti>=1.0.0',
-    'kotti_tinymce',
+    'Kotti>=1.3.0-dev',
 ]
 
 
@@ -46,10 +45,6 @@ setup(
     install_requires=install_requires,
     tests_require=[],
     dependency_links=[],
-    entry_points={
-        'fanstatic.libraries': [
-            'kotti_image = kotti_image.fanstatic:library',
-        ],
-    },
+    entry_points={},
     extras_require={},
 )

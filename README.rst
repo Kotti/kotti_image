@@ -3,6 +3,9 @@ kotti_image
 
 This is an extension to Kotti that allows to add images to your site.
 
+**This package is only compatible with Kotti versions >= 1.3.0-dev and later.**
+Earlier versions of Kotti included the ``Image`` content type and everything directly related.
+
 |pypi|_
 |downloads_month|_
 |license|_
@@ -29,18 +32,34 @@ Development happens at https://github.com/Kotti/kotti_image
 Setup
 =====
 
+Kotti 1.x
+---------
+
+You don't need to do anything.
+``kotti_image`` is a requirement of Kotti and automatically setup for you.
+
+Kotti 2.x (not available yet)
+-----------------------------
+
 To enable the extension in your Kotti site, activate the configurator::
 
     kotti.configurators =
         kotti_image.kotti_configure
 
-Database upgrade
-================
+Configuration
+=============
+
+The initial release doesn't provide any configuration options.
+Custom configuration of image scales will be available in future releases.
+
+Upgrading
+=========
 
 If you are upgrading from a previous version you might have to migrate your
 database.  The migration is performed with `alembic`_ and Kotti's console script
 ``kotti-migrate``. To migrate, run
-``kotti-migrate upgrade --scripts=kotti_image:alembic``.
+``kotti-migrate <your.ini> upgrade --scripts=kotti_image:alembic`` (or
+``kotti-migrate <your.ini> upgrade_all`` to run all Kotti and add on migrations).
 
 For integration of alembic in your environment please refer to the
 `alembic documentation`_. If you have problems with the upgrade,
