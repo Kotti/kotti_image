@@ -36,6 +36,6 @@ def includeme(config):
     """
 
     config.add_translation_dirs('kotti_image:locale')
-    config.add_static_view('static-kotti_image', 'kotti_image:static')
+    # config.add_static_view('static-kotti_image', 'kotti_image:static')
 
     config.scan(__name__)
