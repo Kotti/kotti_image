@@ -136,3 +136,24 @@ def test_add_images(webtest, gallery, assets):
     assert resp.content_length == len(assets['img1']['content'])
     assert resp.content_disposition == 'attachment;filename="{}"'.format(
         assets['img1']['filename'])
+
+
+@pytest.mark.user('admin')
+def test_upload_image(root, dummy_request, webtest):
+
+    # get possible content types for image/png
+    resp = webtest.get('/content_types?mimetype=image/png')
+    assert 'content_types' in resp.json_body
+
+    # images and files are allowed
+    types = resp.json_body['content_types']
+    assert len(types) == 2
+
+    # images must be first
+    assert types[0]['name'] == u'Image'
+    assert types[1]['name'] == u'File'
+
+    # Open the upload 'form'
+    resp = webtest.get('/')
+    resp = resp.click('Upload Content')
+    assert 'Select file(s) to upload' in resp.body
