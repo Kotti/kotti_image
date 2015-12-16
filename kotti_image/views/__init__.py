@@ -45,7 +45,7 @@ class ImageView(object):
         self.request = request
 
     @view_config(name='view',
-                 renderer='kotti:templates/view/image.pt')
+                 renderer='kotti_image:templates/image.pt')
     def view(self):
         """
         :result: Empty dictionary to be handed to the image.pt template for
