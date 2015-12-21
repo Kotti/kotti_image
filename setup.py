@@ -17,6 +17,8 @@ version = '0.1.1'
 
 install_requires = [
     'Kotti>=1.3.0-dev',
+    'rfc6266',
+    'unidecode',
 ]
 
 

@@ -1,6 +1,11 @@
 History
 =======
 
+0.1.2 - 2015-12-21
+------------------
+
+- Use rfc6266 and unidecode for content disposition header.
+
 0.1.1 - 2015-12-16
 ------------------
 
