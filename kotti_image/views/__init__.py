@@ -6,8 +6,10 @@ Created on 2015-12-16
 """
 
 import PIL
+import rfc6266
+from unidecode import unidecode
+
 from kotti.util import extract_from_settings
-from kotti.views.file import UploadedFileResponse
 from plone.scale.scale import scaleImage
 from pyramid.response import Response
 from pyramid.view import view_config
@@ -93,8 +95,8 @@ class ImageView(object):
                 width, height = image_scales[scale]
 
         if not (width and height):
-            return UploadedFileResponse(
-                self.context.data, self.request, disposition)
+            return self.request.uploaded_file_response(
+                self.context.data, disposition)
 
         image, format, size = scaleImage(self.context.data.file.read(),
                                          width=width,
@@ -110,6 +112,9 @@ class ImageView(object):
             ],
             body=image,
         )
+        res.content_disposition = rfc6266.build_header(
+            self.context.filename, disposition=disposition,
+            filename_compat=unidecode(self.context.filename))
 
         return res
 
