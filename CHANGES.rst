@@ -1,6 +1,12 @@
 History
 =======
 
+0.1.3 - 2016-01-04
+------------------
+
+- Include (empty) ``alembic/versions`` directory in distribution to avoid
+  warnings.
+
 0.1.2 - 2015-12-21
 ------------------
 
