@@ -89,52 +89,52 @@ def test_add_images(webtest, gallery, assets):
     resp = webtest.get('/my-gallery/image-1/image')
     assert resp.content_type == assets['img1']['content_type']
     assert resp.content_length == len(assets['img1']['content'])
-    assert resp.content_disposition == 'inline; filename={}'.format(
+    assert resp.content_disposition == 'inline; filename={0}'.format(
         assets['img1']['filename'])
     resp = webtest.get('/my-gallery/image-2/image')
     assert resp.content_type == assets['img2']['content_type']
     assert resp.content_length == len(assets['img2']['content'])
-    assert resp.content_disposition == 'inline; filename={}'.format(
+    assert resp.content_disposition == 'inline; filename={0}'.format(
         assets['img2']['filename'])
 
     # Default scale, attachment
     resp = webtest.get('/my-gallery/image-1/image/download')
     assert resp.content_type == assets['img1']['content_type']
     assert resp.content_length == len(assets['img1']['content'])
-    assert resp.content_disposition == 'attachment; filename={}'.format(
+    assert resp.content_disposition == 'attachment; filename={0}'.format(
         assets['img1']['filename'])
     resp = webtest.get('/my-gallery/image-2/image/download')
     assert resp.content_type == assets['img2']['content_type']
     assert resp.content_length == len(assets['img2']['content'])
-    assert resp.content_disposition == 'attachment; filename={}'.format(
+    assert resp.content_disposition == 'attachment; filename={0}'.format(
         assets['img2']['filename'])
 
     # span1
     resp = webtest.get('/my-gallery/image-1/image/span1')
     assert resp.content_type == assets['img1']['content_type']
     assert 1000 < resp.content_length < 2000
-    assert resp.content_disposition == 'inline; filename={}'.format(
+    assert resp.content_disposition == 'inline; filename={0}'.format(
         assets['img1']['filename'])
 
     # span1, attachment
     resp = webtest.get('/my-gallery/image-1/image/span1/download')
     assert resp.content_type == assets['img1']['content_type']
     assert 1000 < resp.content_length < 2000
-    assert resp.content_disposition == 'attachment; filename={}'.format(
+    assert resp.content_disposition == 'attachment; filename={0}'.format(
         assets['img1']['filename'])
 
     # Invalid predefined scale (should return original size)
     resp = webtest.get('/my-gallery/image-1/image/invalid_scale')
     assert resp.content_type == assets['img1']['content_type']
     assert resp.content_length == len(assets['img1']['content'])
-    assert resp.content_disposition == 'inline; filename={}'.format(
+    assert resp.content_disposition == 'inline; filename={0}'.format(
         assets['img1']['filename'])
 
     # Invalid predefined scale , attachment (should return original size)
     resp = webtest.get('/my-gallery/image-1/image/invalid_scale/download')
     assert resp.content_type == assets['img1']['content_type']
     assert resp.content_length == len(assets['img1']['content'])
-    assert resp.content_disposition == 'attachment; filename={}'.format(
+    assert resp.content_disposition == 'attachment; filename={0}'.format(
         assets['img1']['filename'])
 
 
