@@ -30,3 +30,6 @@ sdist/
 target/
 var/
 kotti_image.db
+bin
+include
+pip-selfcheck.json

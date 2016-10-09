@@ -13,10 +13,12 @@ try:
 except IOError:
     CHANGES = ''
 
-version = '0.1.3'
+version = '0.1.4'
 
 install_requires = [
     'Kotti>=1.3.0-dev',
+    'Pillow',  # dependency of plone.scale
+    'plone.scale',  # needed for image resizing capabilities
     'rfc6266',
     'unidecode',
 ]
