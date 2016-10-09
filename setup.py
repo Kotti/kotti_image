@@ -17,6 +17,8 @@ version = '0.2.0-dev'
 
 install_requires = [
     'Kotti>=1.3.0-dev',
+    'Pillow',  # dependency of plone.scale
+    'plone.scale',  # needed for image resizing capabilities
     'rfc6266',
     'unidecode',
 ]

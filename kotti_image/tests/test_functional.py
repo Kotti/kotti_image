@@ -112,14 +112,14 @@ def test_add_images(webtest, gallery, assets):
     # span1
     resp = webtest.get('/my-gallery/image-1/image/span1')
     assert resp.content_type == assets['img1']['content_type']
-    assert 1000 < resp.content_length < 2000
+    assert 1000 < resp.content_length < 5000
     assert resp.content_disposition == 'inline; filename={0}'.format(
         assets['img1']['filename'])
 
     # span1, attachment
     resp = webtest.get('/my-gallery/image-1/image/span1/download')
     assert resp.content_type == assets['img1']['content_type']
-    assert 1000 < resp.content_length < 2000
+    assert 1000 < resp.content_length < 5000
     assert resp.content_disposition == 'attachment; filename={0}'.format(
         assets['img1']['filename'])
 

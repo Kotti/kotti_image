@@ -6,6 +6,11 @@ History
 
 - No changes yet.
 
+0.1.4 - 2016-10-09
+------------------
+
+- Correctly declare dependencies.
+
 0.1.3 - 2016-01-04
 ------------------
 
