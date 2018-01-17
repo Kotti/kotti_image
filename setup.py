@@ -24,13 +24,11 @@ install_requires = [
 ]
 
 tests_require = [
-    'Kotti>=1.3.0[testing]'
+    'Kotti>=1.3.0<2.0.0.dev0[testing]'
 ]
 
 development_requires = [
-    'check-manifest',
-    'pipdeptree',
-    'pyramid_debugtoolbar',
+    'Kotti>=1.3.0<2.0.0.dev0[development]',
 ]
 
 

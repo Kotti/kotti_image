@@ -6,16 +6,12 @@ This is an extension to Kotti that allows to add images to your site.
 **This package is only compatible with Kotti versions >= 1.3.0-dev and later.**
 Earlier versions of Kotti included the ``Image`` content type and everything directly related.
 
-|pypi|_
-|downloads_month|_
-|license|_
 |build_status_stable|_
+|pypi|_
+|license|_
 
 .. |pypi| image:: https://img.shields.io/pypi/v/kotti_image.svg?style=flat-square
 .. _pypi: https://pypi.python.org/pypi/kotti_image/
-
-.. |downloads_month| image:: https://img.shields.io/pypi/dm/kotti_image.svg?style=flat-square
-.. _downloads_month: https://pypi.python.org/pypi/kotti_image/
 
 .. |license| image:: https://img.shields.io/pypi/l/kotti_image.svg?style=flat-square
 .. _license: http://www.repoze.org/LICENSE.txt
@@ -38,10 +34,10 @@ Kotti 1.x
 You don't need to do anything.
 ``kotti_image`` is a requirement of Kotti and automatically setup for you.
 
-Kotti 2.x (not available yet)
------------------------------
+Kotti 2.x
+---------
 
-To enable the extension in your Kotti site, activate the configurator::
+To enable the extension in your Kotti site (``pip install kotti_image``), activate the configurator::
 
     kotti.configurators =
         kotti_image.kotti_configure
@@ -55,15 +51,12 @@ Custom configuration of image scales will be available in future releases.
 Upgrading
 =========
 
-If you are upgrading from a previous version you might have to migrate your
-database.  The migration is performed with `alembic`_ and Kotti's console script
-``kotti-migrate``. To migrate, run
-``kotti-migrate <your.ini> upgrade --scripts=kotti_image:alembic`` (or
-``kotti-migrate <your.ini> upgrade_all`` to run all Kotti and add on migrations).
+If you are upgrading from a previous version you might have to migrate your database.
+The migration is performed with `alembic`_ and Kotti's console script ``kotti-migrate``.
+To migrate, run ``kotti-migrate <your.ini> upgrade --scripts=kotti_image:alembic`` (or ``kotti-migrate <your.ini> upgrade_all`` to run all Kotti and add on migrations).
 
-For integration of alembic in your environment please refer to the
-`alembic documentation`_. If you have problems with the upgrade,
-please create a new issue in the `tracker`_.
+For integration of alembic in your environment please refer to the `alembic documentation`_.
+If you have problems with the upgrade, please create a new issue in the `tracker`_.
 
 Development
 ===========
