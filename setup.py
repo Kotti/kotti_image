@@ -24,11 +24,15 @@ install_requires = [
 ]
 
 tests_require = [
-    'Kotti>=1.3.0<2.0.0.dev0[testing]'
+    'Kotti[testing]',
 ]
 
 development_requires = [
-    'Kotti>=1.3.0<2.0.0.dev0[development]',
+    'Kotti[development]',
+]
+
+setup_requires = [
+    'setuptools_git>=0.3',
 ]
 
 
@@ -46,7 +50,7 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         "License :: Repoze Public License",
     ],
-    author='Kotti developers',
+    author='Kotti Developers',
     author_email='kotti@googlegroups.com',
     url='https://github.com/Kotti/kotti_image',
     keywords='kotti web cms wcms pylons pyramid sqlalchemy bootstrap',
@@ -55,7 +59,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=install_requires,
-    tests_require=[],
+    tests_require=tests_require,
+    setup_requires=setup_requires,
     dependency_links=[],
     entry_points={},
     extras_require={
