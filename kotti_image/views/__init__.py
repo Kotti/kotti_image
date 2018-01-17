@@ -7,16 +7,14 @@ Created on 2015-12-16
 
 import PIL
 import rfc6266
-from unidecode import unidecode
-
 from kotti.util import extract_from_settings
 from plone.scale.scale import scaleImage
 from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.view import view_defaults
+from unidecode import unidecode
 
 from kotti_image.interfaces import IImage
-
 
 PIL.ImageFile.MAXBLOCK = 33554432
 
@@ -120,8 +118,7 @@ class ImageView(object):
 
 
 def _load_image_scales(settings):
-    image_scale_strings = extract_from_settings(
-        'kotti.image_scales.', settings)
+    image_scale_strings = extract_from_settings('kotti.image_scales.', settings)
 
     for k in image_scale_strings.keys():
         image_scales[k] = [int(x) for x in image_scale_strings[k].split("x")]
