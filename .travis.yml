@@ -10,7 +10,7 @@ env:
 install:
   - pip install -U pip
   - pip install psycopg2 mysqlclient
-  - pip install -e . Kotti<2.0.0.dev0
+  - pip install -e . "Kotti<2.0.0.dev0"
   - pip install "wsgi_intercept==0.5.1"
   - python setup.py dev
 before_script:
