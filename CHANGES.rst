@@ -1,9 +1,10 @@
 History
 =======
 
-0.1.5.dev0 - unreleased
------------------------
+1.0.0 - 2018-01-17
+------------------
 
+- No functional changes.  Maintainance release for Kotti 1.x.
 - Integrate filedepot tween / filter test from Kotti < 2.0.0.
 
 0.1.4 - 2016-10-09
