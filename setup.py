@@ -13,14 +13,24 @@ try:
 except IOError:
     CHANGES = ''
 
-version = '0.1.5.dev0'
+version = '1.0.0.dev0'
 
 install_requires = [
-    'Kotti>=1.3.0-dev',
+    'Kotti>=1.3.0<2.0.0.dev0',
     'Pillow',  # dependency of plone.scale
     'plone.scale',  # needed for image resizing capabilities
-    'rfc6266',
+    'rfc6266-parser',
     'unidecode',
+]
+
+tests_require = [
+    'Kotti>=1.3.0[testing]'
+]
+
+development_requires = [
+    'check-manifest',
+    'pipdeptree',
+    'pyramid_debugtoolbar',
 ]
 
 
@@ -50,5 +60,8 @@ setup(
     tests_require=[],
     dependency_links=[],
     entry_points={},
-    extras_require={},
+    extras_require={
+        'testing': tests_require,
+        'development': development_requires,
+    },
 )

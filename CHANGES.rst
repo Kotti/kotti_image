@@ -4,8 +4,8 @@ History
 0.1.5.dev0 - unreleased
 -----------------------
 
-- No changes yet.
--
+- Integrate filedepot tween / filter test from Kotti < 2.0.0.
+
 0.1.4 - 2016-10-09
 ------------------
 

@@ -112,14 +112,14 @@ def test_add_images(webtest, gallery, assets):
     # span1
     resp = webtest.get('/my-gallery/image-1/image/span1')
     assert resp.content_type == assets['img1']['content_type']
-    assert 1000 < resp.content_length < 5000
+    assert 1000 < resp.content_length < 6000
     assert resp.content_disposition == 'inline; filename={0}'.format(
         assets['img1']['filename'])
 
     # span1, attachment
     resp = webtest.get('/my-gallery/image-1/image/span1/download')
     assert resp.content_type == assets['img1']['content_type']
-    assert 1000 < resp.content_length < 5000
+    assert 1000 < resp.content_length < 6000
     assert resp.content_disposition == 'attachment; filename={0}'.format(
         assets['img1']['filename'])
 
@@ -138,22 +138,39 @@ def test_add_images(webtest, gallery, assets):
         assets['img1']['filename'])
 
 
-@pytest.mark.user('admin')
-def test_upload_image(root, dummy_request, webtest):
+class TestTween:
 
-    # get possible content types for image/png
-    resp = webtest.get('/content_types?mimetype=image/png')
-    assert 'content_types' in resp.json_body
+    @pytest.mark.user('admin')
+    def test_tween(self, connection, webtest, filedepot, root, image_asset,
+                   db_session):
 
-    # images and files are allowed
-    types = resp.json_body['content_types']
-    assert len(types) == 2
+        from kotti_image.resources import Image
+        from kotti.resources import get_root
 
-    # images must be first
-    assert types[0]['name'] == u'Image'
-    assert types[1]['name'] == u'File'
+        # create an image resource
+        root['img'] = Image(data=image_asset.read(), title=u'Image')
+        db_session.flush()
+        root = get_root()
+        img = root['img']
 
-    # Open the upload 'form'
-    resp = webtest.get('/')
-    resp = resp.click('Upload Content')
-    assert 'Select file(s) to upload' in resp.body
+        # the image resource itself is served by the full Kotti stack
+        resp = webtest.get('/img')
+        assert resp.content_type == 'text/html'
+        assert resp.etag is None
+        assert resp.cache_control.max_age == 0
+        assert u'<img src="http://localhost/img/image" />' in resp.text
+
+        # the attachments (created by the filters) are served by the
+        # FiledepotServeApp.
+        resp = webtest.get(img.data[u'thumb_128x128_url'])
+
+        assert resp.etag is not None
+        assert resp.cache_control.max_age == 604800
+        assert resp.body.startswith(b'\x89PNG')
+
+        resp = webtest.get(img.data[u'thumb_256x256_url'])
+        assert resp.etag is not None
+        assert resp.cache_control.max_age == 604800
+        assert resp.body.startswith(b'\x89PNG')
+        resp = webtest.get(img.data[u'thumb_256x256_url'] + 'not', status=404)
+        assert resp.status_code == 404
