@@ -1,6 +1,9 @@
 History
 =======
 
+1.0.1 - 2018-03-16
+------------------
+
 - Use ``rfc_6266_parser`` instead of unmaintained ``rfc_6266`` package.
 - Fix tests for Kotti >= 2.0.0 / Python 3.x.
 

@@ -1,4 +1,5 @@
 import os
+import sys
 
 from setuptools import setup
 from setuptools import find_packages
@@ -13,10 +14,14 @@ try:
 except IOError:
     CHANGES = ''
 
-version = '1.0.1.dev0'
+version = '1.0.1'
 
-install_requires = [
-    'Kotti>=1.3.0',
+if sys.version_info >= (3, ):
+    install_requires = ['Kotti>=2.0.0.dev0', ]
+else:
+    install_requires = ['Kotti<2.0.0.dev0', ]
+
+install_requires += [
     'Pillow',  # dependency of plone.scale
     'plone.scale',  # needed for image resizing capabilities
     'rfc6266-parser',
@@ -26,7 +31,6 @@ install_requires = [
 # copied from Kotti, necessary because extras are not supported in
 # ``extras_require``.  See https://github.com/pypa/pip/issues/3189
 tests_require = [
-    'kotti_image',
     'WebTest',
     'mock',
     'Pillow',  # thumbnail filter in depot tween tests
