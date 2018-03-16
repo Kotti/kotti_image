@@ -33,3 +33,6 @@ kotti_image.db
 bin
 include
 pip-selfcheck.json
+pyvenv.cfg
+README.txt
+.pytest_cache

@@ -46,7 +46,7 @@ def test_add_images(webtest, gallery, assets):
         assets['img1']['content'],
         assets['img1']['content_type'])
     resp = form.submit('save').maybe_follow()
-    assert 'Item was added' in resp.body
+    assert b'Item was added' in resp.body
 
     # add img 2
     resp = webtest.get('/my-gallery')
@@ -59,7 +59,7 @@ def test_add_images(webtest, gallery, assets):
         assets['img2']['content'],
         assets['img2']['content_type'])
     resp = form.submit('save').maybe_follow()
-    assert 'Item was added' in resp.body
+    assert b'Item was added' in resp.body
 
     # img without file
     resp = webtest.get('/my-gallery')
@@ -68,14 +68,14 @@ def test_add_images(webtest, gallery, assets):
     form['title'] = 'Image 2'
     form['description'] = 'An even more beautiful image'
     resp = form.submit('save').maybe_follow()
-    assert 'There was a problem with your submission' in resp.body
-    assert 'Required' in resp.body
+    assert b'There was a problem with your submission' in resp.body
+    assert b'Required' in resp.body
 
     # View gallery and images
     resp = webtest.get('/my-gallery/@@contents')
-    assert 'Image 1' in resp.body
-    assert 'Image 2' in resp.body
-    assert resp.body.find('Image 1') < resp.body.find('Image 2')
+    assert b'Image 1' in resp.body
+    assert b'Image 2' in resp.body
+    assert resp.body.find(b'Image 1') < resp.body.find(b'Image 2')
     resp = webtest.get('/my-gallery/image-1')
     assert resp.content_type == 'text/html'
     resp = webtest.get('/my-gallery/image-2')
