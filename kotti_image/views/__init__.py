@@ -6,7 +6,7 @@ Created on 2015-12-16
 """
 
 import PIL
-import rfc6266
+import rfc6266_parser
 from kotti.util import extract_from_settings
 from plone.scale.scale import scaleImage
 from pyramid.response import Response
@@ -44,8 +44,7 @@ class ImageView(object):
         self.context = context
         self.request = request
 
-    @view_config(name='view',
-                 renderer='kotti_image:templates/image.pt')
+    @view_config(name='view', renderer='kotti_image:templates/image.pt')
     def view(self):
         """
         :result: Empty dictionary to be handed to the image.pt template for
@@ -55,7 +54,7 @@ class ImageView(object):
 
         return {}
 
-    @view_config(name="image")
+    @view_config(name='image')
     def image(self, subpath=None):
         """Return the image in a specific scale, either inline
         (default) or as attachment.
@@ -80,11 +79,11 @@ class ImageView(object):
         width, height = (None, None)
         subpath = list(subpath)
 
-        if (len(subpath) > 0) and (subpath[-1] == "download"):
-            disposition = "attachment"
+        if (len(subpath) > 0) and (subpath[-1] == 'download'):
+            disposition = 'attachment'
             subpath.pop()
         else:
-            disposition = "inline"
+            disposition = 'inline'
 
         if len(subpath) == 1:
             scale = subpath[0]
@@ -99,7 +98,7 @@ class ImageView(object):
         image, format, size = scaleImage(self.context.data.file.read(),
                                          width=width,
                                          height=height,
-                                         direction="thumb")
+                                         direction='thumb')
         res = Response(
             headerlist=[
                 ('Content-Disposition', '{0};filename="{1}"'.format(
@@ -110,7 +109,7 @@ class ImageView(object):
             ],
             body=image,
         )
-        res.content_disposition = rfc6266.build_header(
+        res.content_disposition = rfc6266_parser.build_header(
             self.context.filename, disposition=disposition,
             filename_compat=unidecode(self.context.filename))
 
@@ -121,7 +120,7 @@ def _load_image_scales(settings):
     image_scale_strings = extract_from_settings('kotti.image_scales.', settings)
 
     for k in image_scale_strings.keys():
-        image_scales[k] = [int(x) for x in image_scale_strings[k].split("x")]
+        image_scales[k] = [int(x) for x in image_scale_strings[k].split('x')]
 
 
 def includeme(config):

@@ -12,7 +12,8 @@ from pytest import fixture
 
 @fixture(scope='session')
 def custom_settings():
-
+    # noinspection PyUnresolvedReferences c
+    from kotti_image.resources import Image
     return {
-        # 'kotti.configurators': 'kotti_image.kotti_configure'
+        'kotti.configurators': 'kotti_image.kotti_configure'
     }
