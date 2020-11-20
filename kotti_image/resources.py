@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 Created on 2015-12-16
 :author: Andreas Kaiser (disko@binary-punks.com)
@@ -24,17 +22,20 @@ class Image(SaveDataMixin, Content):
 
     #: Primary key column in the DB
     #: (:class:`sqlalchemy.types.Integer`)
-    id = Column(Integer(), ForeignKey('contents.id'), primary_key=True)
+    id = Column(Integer(), ForeignKey("contents.id"), primary_key=True)
 
     data_filters = (
-        WithThumbnailFilter(size=(128, 128), format='PNG'),
-        WithThumbnailFilter(size=(256, 256), format='PNG'))
+        WithThumbnailFilter(size=(128, 128), format="PNG"),
+        WithThumbnailFilter(size=(256, 256), format="PNG"),
+    )
 
     type_info = Content.type_info.copy(
-        name=u'Image',
-        title=_(u'Image'),
-        add_view=u'add_image',
-        addable_to=[u'Document'],
+        name="Image",
+        title=_("Image"),
+        add_view="add_image",
+        addable_to=["Document"],
         selectable_default_views=[],
-        uploadable_mimetypes=['image/*', ],
-        )
+        uploadable_mimetypes=[
+            "image/*",
+        ],
+    )

@@ -1,5 +1,3 @@
-
-
 def test_image_scale_loading_it():
 
     from kotti_image.views import _load_image_scales, image_scales

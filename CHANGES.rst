@@ -1,6 +1,10 @@
 History
 =======
 
+- Drop support for Python 2.
+- Remove dependency from ``rfc_6266_parser`` and use
+  ``depot.utils.make_content_disposition`` instead.
+
 1.0.1 - 2018-03-16
 ------------------
 
