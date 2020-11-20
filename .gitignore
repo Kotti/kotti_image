@@ -36,3 +36,4 @@ pip-selfcheck.json
 pyvenv.cfg
 README.txt
 .pytest_cache
+.idea
